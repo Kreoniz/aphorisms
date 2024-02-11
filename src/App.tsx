@@ -3,14 +3,21 @@ import Aphorism from './Aphorism.tsx'
 
 const URL = 'http://api.quotable.io/';
 
-async function getQuotes(amount=20) {
-  const quotes = await fetch(URL + 'quotes?limit=' + amount);
-  const json = await quotes.json();
-  return json.results;
+interface Item {
+  _id: string;
+  content: string;
+  author: string;
+  tags: Array<string>;
 }
 
 function App() {
   const [aphorisms, setAphorisms] = useState([]);
+
+  async function getQuotes(amount=20) {
+    const quotes = await fetch(URL + 'quotes?limit=' + amount);
+    const json = await quotes.json();
+    return json.results;
+  }
 
   useEffect(() => {
     getQuotes()
@@ -21,10 +28,10 @@ function App() {
 
   return (
     <div>
-      {aphorisms.map((item) => {
+      {aphorisms.map((item: Item) => {
         return (
-          <div key={item._id}>
-            <h2>Aphorism</h2>
+          <div className="m-4" key={item._id}>
+            <h2 className="text-xl font-bold underline">Aphorism</h2>
             <Aphorism quote={item.content} author={item.author} tags={item.tags} />
           </div>
         )
