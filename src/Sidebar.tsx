@@ -12,7 +12,7 @@ function Sidebar() {
   const [tags, setTags] = useState([]);
 
   async function getTags() {
-    const quotes = await fetch(URL + 'tags');
+    const quotes = await fetch(URL + 'tags', { mode: 'cors' });
     const json = await quotes.json();
     return json;
   }
