@@ -1,26 +1,23 @@
 function Aphorism({ quote, author, tags }: { quote: string, author: string, tags: Array<string> }) {
   return (
-      <div>
+      <div className='border-2 rounded p-3 sm:p-4'>
         <div>
-          <h3 className="font-bold">Quote:</h3>
           {quote}
         </div>
 
-        <div>
-          <h3 className="font-bold">Author:</h3>
-          {author}
+        <div className="text-right my-2 text-sm text-gray-500">
+          © {author}
         </div>
 
-        <div>
-          <h3 className="font-bold">Tags:</h3>
-          {tags
-          ? tags.map((tag, index) => {
-              return (
-                <div key={index}>{tag}</div>
-              );
-          })
-          : null
-          }
+        <div className="font-light text-sm text-gray-500">
+          {tags.map((tag, index) => {
+              if (index !== tags.length - 1) {
+                return <span key={index}>{tag}, </span>;
+              } else {
+                return <span key={index}>{tag}</span>;
+              }
+          })}
+
         </div>
       </div>
     );

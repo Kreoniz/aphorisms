@@ -13,8 +13,8 @@ interface Item {
 function App() {
   const [aphorisms, setAphorisms] = useState([]);
 
-  async function getQuotes(amount=20) {
-    const quotes = await fetch(URL + 'quotes?limit=' + amount);
+  async function getQuotes(amount=20, tags='famous-quotes') {
+    const quotes = await fetch(URL + 'quotes?tags=' + tags + '&limit=' + amount);
     const json = await quotes.json();
     return json.results;
   }
@@ -30,8 +30,7 @@ function App() {
     <div>
       {aphorisms.map((item: Item) => {
         return (
-          <div className="m-4" key={item._id}>
-            <h2 className="text-xl font-bold underline">Aphorism</h2>
+          <div key={item._id} className="my-4 sm:mx-4 mx-2">
             <Aphorism quote={item.content} author={item.author} tags={item.tags} />
           </div>
         )
