@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import Aphorism from './Aphorism.tsx'
-
-const URL = 'http://api.quotable.io/';
+import Aphorism from './Aphorism.tsx';
+import getQuotes from './quotes.ts';
 
 interface Item {
   _id: string;
@@ -12,12 +11,6 @@ interface Item {
 
 function Feed() {
   const [aphorisms, setAphorisms] = useState([]);
-
-  async function getQuotes(amount=20, tags='famous-quotes') {
-    const quotes = await fetch(URL + 'quotes?tags=' + tags + '&limit=' + amount, { mode: 'cors' });
-    const json = await quotes.json();
-    return json.results;
-  }
 
   useEffect(() => {
     getQuotes()
