@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const URL = 'http://api.quotable.io/';
 
@@ -30,13 +31,14 @@ function Sidebar() {
       <div>
       {tags.map((tag: Tag) => {
         return (
-          <div
+          <Link
             className="block hover:underline hover:cursor-pointer w-max"
             key={tag._id}
             data-slug={tag.slug}
+            to={`category/${tag.slug}`}
           >
             {tag.name}
-          </div>
+          </Link>
         );
       })}
       </div>
