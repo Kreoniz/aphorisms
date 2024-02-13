@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+async function getTags() {
+  const quotes = await fetch(URL + 'tags', { mode: 'cors' });
+  const json = await quotes.json();
+  return json;
+}
+
 const URL = 'http://api.quotable.io/';
+
+export async function loader({ request, params }: { request: any, params: any }) {
+  return fetch(
+    `${URL}quotes?tags=${params.slug}`,
+    { mode: 'cors', signal: request.signal },
+  )
+}
 
 interface Tag {
   _id: string;
@@ -11,12 +24,6 @@ interface Tag {
 
 function Sidebar() {
   const [tags, setTags] = useState([]);
-
-  async function getTags() {
-    const quotes = await fetch(URL + 'tags', { mode: 'cors' });
-    const json = await quotes.json();
-    return json;
-  }
 
   useEffect(() => {
     getTags()

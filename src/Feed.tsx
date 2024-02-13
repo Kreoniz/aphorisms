@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Aphorism from './Aphorism.tsx';
 import getQuotes from './quotes.ts';
+import { useLocation } from 'react-router-dom';
 
 interface Item {
   _id: string;
@@ -10,14 +11,22 @@ interface Item {
 }
 
 function Feed() {
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  let slug = '';
+  if (pathname !== '/') {
+    slug = pathname.slice(pathname.indexOf('/', 1) + 1);
+  }
+
   const [aphorisms, setAphorisms] = useState([]);
 
   useEffect(() => {
-    getQuotes()
+    getQuotes(slug)
     .then((response) => {
       setAphorisms(response);
     });
-  }, []);
+  }, [slug]);
 
   return (
     <div>

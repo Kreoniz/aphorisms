@@ -6,17 +6,21 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
-import Category from './routes/category';
+import Feed from './Feed';
+import { loader as categoryLoader } from './Sidebar';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-  },
-  {
-    path: 'category/:slug',
-    element: <Category />,
-  },
+    children: [
+        {
+          path: 'category/:slug',
+          element: <Feed />,
+          loader: categoryLoader,
+        },
+      ],
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
