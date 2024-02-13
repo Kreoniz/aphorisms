@@ -2,7 +2,15 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 async function getTags() {
-  const quotes = await fetch(URL + 'tags', { mode: 'cors' });
+  const quotes = await fetch(
+      URL + 'tags',
+      {
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      },
+  );
   const json = await quotes.json();
   return json;
 }
