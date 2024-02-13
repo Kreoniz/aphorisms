@@ -34,7 +34,7 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="font-bold text-2xl text-center">Tags</div>
+      <div className="font-bold text-2xl text-center">Categories</div>
       <div>
       {tags.map((tag: Tag) => {
         return (
