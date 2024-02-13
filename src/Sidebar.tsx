@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom';
 const URL = 'https://api.quotable.io/';
 
 async function getTags() {
-  const quotes = await fetch(URL + 'tags');
+  const quotes = await fetch(
+      URL + 'tags',
+      {
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      },
+  );
   const json = await quotes.json();
   return json;
 }
@@ -12,7 +20,7 @@ async function getTags() {
 export async function loader({ request, params }: { request: any, params: any }) {
   return fetch(
     `${URL}quotes?tags=${params.slug}`,
-    { signal: request.signal },
+    { mode: 'cors', signal: request.signal },
   )
 }
 
