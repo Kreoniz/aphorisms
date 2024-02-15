@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import loading from '../public/loading.gif';
 
 const URL = 'https://api.quotable.io/';
 
@@ -32,11 +33,14 @@ interface Tag {
 
 function Sidebar() {
   const [tags, setTags] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getTags()
     .then((response) => {
       setTags(response);
+      setIsLoading(false);
     });
   }, []);
 
@@ -44,24 +48,28 @@ function Sidebar() {
     <div>
       <div className="font-bold text-2xl text-center">Categories</div>
       <div>
-      {tags.map((tag: Tag) => {
-        return (
-          <Link
-            className="block hover:underline hover:cursor-pointer w-max"
-            key={tag._id}
-            data-slug={tag.slug}
-            to={`category/${tag.slug}`}
-            onClick={() => {
-              const sidebar: Element | null = document.querySelector('#sidebar');
-              if (sidebar) {
-                sidebar.classList.add('hidden');
-              }}
-            }
-          >
-            {tag.name}
-          </Link>
-        );
-      })}
+      {isLoading
+        ? <div className="flex justify-center mt-4">
+            <img src={loading} alt="loading" className="bg-gray-200 rounded-lg w-1/2" />
+          </div>
+        : tags.map((tag: Tag) => {
+          return (
+            <Link
+              className="block hover:underline hover:cursor-pointer w-max"
+              key={tag._id}
+              data-slug={tag.slug}
+              to={`category/${tag.slug}`}
+              onClick={() => {
+                const sidebar: Element | null = document.querySelector('#sidebar');
+                if (sidebar) {
+                  sidebar.classList.add('hidden');
+                }}
+              }
+            >
+              {tag.name}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
