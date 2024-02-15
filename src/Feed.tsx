@@ -28,6 +28,14 @@ function Feed() {
     });
   }, [slug]);
 
+  if (aphorisms.length === 0) {
+    return (
+      <div className="text-center w-full text-2xl">
+        Empty!
+      </div>
+    )
+  }
+
   return (
     <div>
       {aphorisms.map((item: Item) => {

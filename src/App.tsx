@@ -30,9 +30,7 @@ function App() {
       </div>
 
       <div className="flex my-4">
-        <div>
-          <Feed />
-        </div>
+        <Feed />
 
         <div
           id="sidebar"
