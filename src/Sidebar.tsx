@@ -51,6 +51,12 @@ function Sidebar() {
             key={tag._id}
             data-slug={tag.slug}
             to={`category/${tag.slug}`}
+            onClick={() => {
+              const sidebar: Element | null = document.querySelector('#sidebar');
+              if (sidebar) {
+                sidebar.classList.add('hidden');
+              }}
+            }
           >
             {tag.name}
           </Link>
