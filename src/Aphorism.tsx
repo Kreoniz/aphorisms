@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Liked from '/src/assets/heart-icon.svg';
+import Unliked from '/src/assets/heart-thin-icon.svg';
 
 function Likes({ id }: { id: string }) {
   const [like, setLike] = useState(localStorage.getItem(id));
@@ -17,8 +19,8 @@ function Likes({ id }: { id: string }) {
     <button type="button" onClick={click}>
       {
         like
-        ? <img className="w-6" src="/public/heart-icon.svg" />
-        : <img className="w-6" src="/public/heart-thin-icon.svg" />
+        ? <img className="w-6" src={Liked} />
+        : <img className="w-6" src={Unliked} />
       }
     </button>
     );
