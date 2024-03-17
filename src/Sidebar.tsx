@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import loading from '../public/loading.gif';
+import loading from '/loading.gif';
 
 const URL = 'https://api.quotable.io/';
 

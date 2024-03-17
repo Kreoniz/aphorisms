@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Aphorism from './Aphorism.tsx';
 import getQuotes from './quotes.ts';
 import { useLocation } from 'react-router-dom';
-import loading from '../public/loading.gif';
+import loading from '/loading.gif';
 
 interface Item {
   _id: string;
@@ -49,7 +49,7 @@ function Feed() {
         : aphorisms.map((item: Item) => {
           return (
             <div key={item._id} className="mb-4 sm:mx-4 mx-2">
-              <Aphorism quote={item.content} author={item.author} tags={item.tags} />
+              <Aphorism quote={item.content} author={item.author} tags={item.tags} id={item._id} />
             </div>
           )
         })
